@@ -15,7 +15,7 @@ const {
 } = require('./api');
 
 const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4027;
 const DIST_DIR = './dist';
 
 const app = express();

@@ -1,0 +1,9 @@
+APP_BASE=apps/ecars-pwa
+DATABASE_URL='postgres://qiiweblpynyrbn:0f195a2ac866756374f649cad7a0fb69e833441700f71168bb68fe3593bda683@ec2-3-91-127-228.compute-1.amazonaws.com:5432/df7son7u2b04mn'
+SF_LOGIN_URL='https://test.salesforce.com'
+SF_PASSWORD='U[6Pux$xEb$@p'
+SF_TOKEN=fbMkRScJZvNU6RYZYQmDWmSUz
+SF_USERNAME='test-djrtkd6ohrea@example.com'
+VAPID_EMAIL='mail@dummy.org'
+VAPID_PRIVATE_KEY=vvtgfGjf0g_LgkIruTdIY8E8yr8JYb-zCI9CNJGTzss
+VAPID_PUBLIC_KEY=BFBnx63zTJVD9AS8ltsmWiU2oi35mw63YjuXw5Kb_3_9zpprWtNB9Jhu8075UfGNWYdvznoFc9iiTJpLEtTLkuM

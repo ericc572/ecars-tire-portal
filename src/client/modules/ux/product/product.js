@@ -3,8 +3,7 @@ import { subscribe, unsubscribe, isSubscribed } from 'ux/push';
 
 export default class Product extends LightningElement {
     @api selectedRange;
-    @api selectedExteriorColor;
-    @api selectedInteriorColor;
+    @api selectedRoadside;
 
     hasSubscription = isSubscribed();
     showToast = false;
@@ -25,6 +24,10 @@ export default class Product extends LightningElement {
         this.cellPhone = event.target.value;
     }
 
+    handleDescriptionChange(event) {
+        this.description = event.target.value;
+    }
+
     handleSubscribe() {
         if (this.firstName && this.lastName) {
             subscribe(
@@ -33,14 +36,14 @@ export default class Product extends LightningElement {
                     lastName: this.lastName,
                     email: this.email,
                     mobilePhone: this.cellPhone,
+                    description: this.description,
                     company: 'Private',
                     leadSource: 'Web'
                 },
                 {
-                    name: 'Model One',
+                    name: 'New Case:',
                     range: this.selectedRange.replace(/ /, '_'),
-                    exteriorColor: this.selectedExteriorColor.replace(/ /, '_'),
-                    interiorColor: this.selectedInteriorColor.replace(/ /, '_')
+                    roadside: this.selectedRoadside.replace(/ /, '_'),
                 }
             )
                 .then(() => {

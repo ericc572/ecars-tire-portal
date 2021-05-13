@@ -17,6 +17,8 @@
         type="email"
         onchange={handleEmailChange}
     ></lightning-input>
+
+    <lightning-textarea name="description" onchange={handleDescriptionChange} required value="" label="Please provide more details so we can assist you: " ></lightning-textarea>
     <div class="buttons slds-m-top_large">
         <lightning-button
             icon-name="utility:chevronleft"
@@ -25,7 +27,7 @@
         ></lightning-button>
         <lightning-button
             if:false={hasSubscription}
-            label="Contact Me"
+            label="Submit Request"
             type="brand"
             onclick={handleSubscribe}
         ></lightning-button>

@@ -37,7 +37,7 @@
     padding: 30px 20px;
 }
 
-.color-palette {
+.option-palette {
     display: flex;
 }
 
@@ -72,6 +72,32 @@ a.range-option.selected {
 }
 
 a.range-option > .label {
+    flex: 1;
+}
+
+a.roadside-option {
+    display: flex;
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: solid 1px #dddbda;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 0.25rem;
+    border-left-width: 4px;
+}
+
+a.roadside-option:hover {
+    border-color: #3a49da;
+    border-left-width: 4px;
+}
+
+a.roadside-option.selected {
+    border-color: #3a49da;
+    border-left-width: 4px;
+}
+
+a.roadside-option > .label {
     flex: 1;
 }
 

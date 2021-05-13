@@ -7,71 +7,26 @@ export default class Configurator extends LightningElement {
 
     ranges = [
         {
-            label: 'Short Range',
-            price: 25000,
+            label: 'Buy a new Tire',
             className: 'range-option selected'
         },
-        { label: 'Medium Range', price: 35000, className: 'range-option' },
-        { label: 'Long Range', price: 45000, className: 'range-option' }
+        { label: 'Returns and Exchanges', className: 'range-option' },
+        { label: 'File Urgent Case', className: 'range-option' }
     ];
 
-    exteriorColors = [
+    roadsideAssistance = [
         {
-            label: 'Pearl White',
-            code: 'white',
-            price: 0,
-            className: 'color-option white selected'
+            label: 'Yes',
+            className: 'roadside-option selected'
         },
         {
-            label: 'VIP Black',
-            code: 'black',
-            price: 1000,
-            className: 'color-option black'
+            label: 'No',
+            className: 'roadside-option'
         },
-        {
-            label: 'Pulsar Red',
-            code: 'red',
-            price: 2000,
-            className: 'color-option red'
-        },
-        {
-            label: 'Deep Blue',
-            code: 'blue',
-            price: 2000,
-            className: 'color-option blue'
-        },
-        {
-            label: 'Modern Green',
-            code: 'green',
-            price: 2000,
-            className: 'color-option green'
-        }
-    ];
-
-    interiorColors = [
-        {
-            label: 'Vegan White',
-            code: 'white',
-            price: 0,
-            className: 'color-option white selected'
-        },
-        {
-            label: 'Vegan Black',
-            code: 'black',
-            price: 1000,
-            className: 'color-option black'
-        },
-        {
-            label: 'Vegan Tan',
-            code: 'tan',
-            price: 2000,
-            className: 'color-option tan'
-        }
     ];
 
     selectedRange = this.ranges[0];
-    selectedExteriorColor = this.exteriorColors[0];
-    selectedInteriorColor = this.interiorColors[0];
+    selectedRoadside = this.roadsideAssistance[0];
     leadRecordId = '';
 
     get imgUrl() {
@@ -79,7 +34,7 @@ export default class Configurator extends LightningElement {
     }
 
     get imgClass() {
-        if (this.currentSection === 3) {
+        if (this.currentSection === 2) {
             return 'container-images';
         }
         return 'container-images padded';
@@ -87,6 +42,7 @@ export default class Configurator extends LightningElement {
 
     handleRangeChange(event) {
         const rangeLabel = event.currentTarget.dataset.range;
+        console.log(rangeLabel);
         let ranges = [];
         this.ranges.forEach((range) => {
             let className = 'range-option';
@@ -96,49 +52,33 @@ export default class Configurator extends LightningElement {
             }
             ranges.push({
                 label: range.label,
-                price: range.price,
                 className
             });
         });
         this.ranges = ranges;
+        console.log(this.ranges);
+        console.log(this.selectedRange);
     }
 
-    handleExteriorColorChange(event) {
-        const colorCode = event.currentTarget.dataset.color;
-        let colors = [];
-        this.exteriorColors.forEach((color) => {
-            let className = 'color-option';
-            if (color.code === colorCode) {
-                this.selectedExteriorColor = color;
+    handleRoadside(event) {
+        // console.log(event.currentTarget.dataset);
+        const colorLabel = event.currentTarget.dataset.range;
+        console.log(colorLabel);
+        let roadsideAssistance = [];
+        this.roadsideAssistance.forEach((roadside) => {
+            let className = 'roadside-option';
+            if (roadside.label === colorLabel) {
+                this.selectedRoadside = roadside;
                 className = className + ' selected';
             }
-            colors.push({
-                label: color.label,
-                code: color.code,
-                price: color.price,
-                className: className + ' ' + color.code
+            roadsideAssistance.push({
+                label: roadside.label,
+                className
             });
         });
-        this.exteriorColors = colors;
-    }
-
-    handleInteriorColorChange(event) {
-        const colorCode = event.currentTarget.dataset.color;
-        let colors = [];
-        this.interiorColors.forEach((color) => {
-            let className = 'color-option';
-            if (color.code === colorCode) {
-                this.selectedInteriorColor = color;
-                className = className + ' selected';
-            }
-            colors.push({
-                label: color.label,
-                code: color.code,
-                price: color.price,
-                className: className + ' ' + color.code
-            });
-        });
-        this.interiorColors = colors;
+        this.roadsideAssistance = roadsideAssistance;
+        console.log(this.roadsideAssistance);
+        console.log(this.selectedRoadside);
     }
 
     handleLeadChange(event) {
@@ -169,8 +109,5 @@ export default class Configurator extends LightningElement {
     }
     get isSection3() {
         return this.currentSection === 3;
-    }
-    get isSection4() {
-        return this.currentSection === 4;
     }
 }
