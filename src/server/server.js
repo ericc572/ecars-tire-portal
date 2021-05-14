@@ -9,6 +9,7 @@ const logger = require('pino')({ prettyPrint: { colorize: true } });
 const pino = require('express-pino-logger');
 const {
     createCase,
+    caseChanged,
 } = require('./api');
 
 const HOST = process.env.HOST || 'localhost';
@@ -20,9 +21,10 @@ const app = express();
 app.use(pino({ logger }));
 
 app.use(compression());
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.static(DIST_DIR));
 app.post('/api/case', createCase);
+app.post('/api/event', caseChanged);
 
 app.use('/', (_req, res) => {
     res.sendFile(path.resolve(DIST_DIR, 'index.html'));

@@ -83,6 +83,20 @@ export default class Product extends LightningElement {
         }
     }
 
+    handleCaseCased(status) {
+        this.dispatchEvent(
+            new CustomEvent('showtoast', {
+                bubbles: true,
+                composed: true,
+                detail: {
+                    variant: 'success',
+                    message:
+                        `Your case status has been changed to: ${status}`
+                }
+            })
+        );
+    }
+
     handleUnsubscribe() {
         this.dispatchEvent(
             new CustomEvent('showtoast', {

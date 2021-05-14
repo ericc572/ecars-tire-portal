@@ -19,7 +19,7 @@
         "watch": "run-p watch:client watch:server",
         "watch:client": "lwc-services watch",
         "watch:server": "nodemon",
-        "heroku-postbuild": "npm run build && node scripts/createPostgresTable.js"
+        "heroku-postbuild": "npm run build"
     },
     "dependencies": {
         "@salesforce-ux/design-system": "^2.14.2",
@@ -28,6 +28,7 @@
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "express-pino-logger": "^5.0.0",
+        "faye": "^1.4.0",
         "jsforce": "^1.10.1",
         "lightning-base-components": "^1.10.2-alpha",
         "pg": "^8.5.1",
