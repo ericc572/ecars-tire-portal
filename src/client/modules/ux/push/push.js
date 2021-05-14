@@ -33,6 +33,26 @@ const createSubscription = (subscription, lead, car) => {
     });
 };
 
+const createCase = (lead) => {
+    console.log("creating case...")
+    return new Promise((resolve, reject) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ lead })
+        };
+
+        fetch('/api/case', options).then(function (response) {
+            if (!response.ok) {
+                reject(new Error('Bad status code from server.'));
+            }
+            resolve();
+        });
+    });
+};
+
 const deleteSubscription = (subscription) => {
     return new Promise((resolve, reject) => {
         const options = {
@@ -86,9 +106,9 @@ const subscribe = (lead, car) => {
         };
         swRegistration.pushManager
             .subscribe(options)
-            .then((subscription) => createSubscription(subscription, lead, car))
+            .then((subscription) => createCase(subscription, lead, car))
             .then(() => {
-                console.log('User subscribed successfully');
+                console.log('Case created successfully');
                 _isSubscribed = true;
                 resolve();
             })
@@ -143,9 +163,9 @@ const fetchPublicKey = () => {
 fetchPublicKey();
 if ('serviceWorker' in navigator && 'PushManager' in window) {
     console.log('Service Worker and Push is supported');
-    registerServiceWorker();
+    // registerServiceWorker();
 } else {
     console.warn('Push messaging is not supported');
 }
 
-export { subscribe, unsubscribe, isSubscribed };
+export { subscribe, unsubscribe, isSubscribed, createCase };

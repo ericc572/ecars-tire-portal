@@ -11,31 +11,31 @@ if (isNotCompatibleBrowser) {
 } else {
     customElements.define('ux-app', UxApp.CustomElementConstructor);
 
-    if ('serviceWorker' in navigator) {
-        // Register service worker after page load event to avoid delaying critical requests for the
-        // initial page load.
-        window.addEventListener('load', () => {
-            navigator.serviceWorker
-                .register('/sw.js')
-                .then((reg) => {
-                    if (reg.installing) {
-                        console.log('Service worker installing');
-                    } else if (reg.waiting) {
-                        console.log('Service worker installed');
-                    } else if (reg.active) {
-                        console.log('Service worker active');
-                    }
-                    if (Notification.permission === 'denied') {
-                        console.log('The user has blocked notifications.');
-                    }
-                })
-                .catch((regError) => {
-                    console.log(
-                        'Error on service worker registration: ' + regError
-                    );
-                });
-        });
-    }
+    // if ('serviceWorker' in navigator) {
+    //     // Register service worker after page load event to avoid delaying critical requests for the
+    //     // initial page load.
+    //     window.addEventListener('load', () => {
+    //         navigator.serviceWorker
+    //             .register('/sw.js')
+    //             .then((reg) => {
+    //                 if (reg.installing) {
+    //                     console.log('Service worker installing');
+    //                 } else if (reg.waiting) {
+    //                     console.log('Service worker installed');
+    //                 } else if (reg.active) {
+    //                     console.log('Service worker active');
+    //                 }
+    //                 if (Notification.permission === 'denied') {
+    //                     console.log('The user has blocked notifications.');
+    //                 }
+    //             })
+    //             .catch((regError) => {
+    //                 console.log(
+    //                     'Error on service worker registration: ' + regError
+    //                 );
+    //             });
+    //     });
+    // }
 }
 
 function detectFeatures() {

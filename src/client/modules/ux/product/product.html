@@ -26,16 +26,9 @@
             onclick={handlePrevious}
         ></lightning-button>
         <lightning-button
-            if:false={hasSubscription}
             label="Submit Request"
             type="brand"
             onclick={handleSubscribe}
-        ></lightning-button>
-        <lightning-button
-            if:true={hasSubscription}
-            label="Unsubscribe"
-            type="brand"
-            onclick={handleUnsubscribe}
         ></lightning-button>
     </div>
 </template>

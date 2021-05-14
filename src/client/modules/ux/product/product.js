@@ -1,11 +1,10 @@
 import { LightningElement, api } from 'lwc';
-import { subscribe, unsubscribe, isSubscribed } from 'ux/push';
+import { createCase } from 'ux/push';
 
 export default class Product extends LightningElement {
     @api selectedRange;
     @api selectedRoadside;
 
-    hasSubscription = isSubscribed();
     showToast = false;
 
     handleFirstNameChange(event) {
@@ -30,18 +29,17 @@ export default class Product extends LightningElement {
 
     handleSubscribe() {
         if (this.firstName && this.lastName) {
-            subscribe(
+            createCase(
                 {
+                    name: 'New Case:',                    
                     firstName: this.firstName,
                     lastName: this.lastName,
-                    email: this.email,
-                    mobilePhone: this.cellPhone,
+                    contactemail: this.email,
+                    priority: "High",
+                    contactPhone: this.cellPhone,
                     description: this.description,
                     company: 'Private',
-                    leadSource: 'Web'
-                },
-                {
-                    name: 'New Case:',
+                    leadSource: 'Web',
                     range: this.selectedRange.replace(/ /, '_'),
                     roadside: this.selectedRoadside.replace(/ /, '_'),
                 }
@@ -53,7 +51,7 @@ export default class Product extends LightningElement {
                             composed: true,
                             detail: {
                                 variant: 'success',
-                                message: 'Thank you for your subscription!'
+                                message: 'Your case has been received!'
                             }
                         })
                     );
@@ -65,14 +63,11 @@ export default class Product extends LightningElement {
                             composed: true,
                             detail: {
                                 variant: 'error',
-                                message: `Your subscription failed. (${err.message})`
+                                message: `New case generation failed. (${err.message})`
                             }
                         })
                     );
                 })
-                .finally(() => {
-                    this.hasSubscription = isSubscribed();
-                });
         } else {
             this.dispatchEvent(
                 new CustomEvent('showtoast', {
@@ -89,34 +84,16 @@ export default class Product extends LightningElement {
     }
 
     handleUnsubscribe() {
-        unsubscribe()
-            .then(() => {
-                this.dispatchEvent(
-                    new CustomEvent('showtoast', {
-                        bubbles: true,
-                        composed: true,
-                        detail: {
-                            variant: 'success',
-                            message: 'Your unsubscription is registered.'
-                        }
-                    })
-                );
+        this.dispatchEvent(
+            new CustomEvent('showtoast', {
+                bubbles: true,
+                composed: true,
+                detail: {
+                    variant: 'success',
+                    message: 'Your unsubscription is registered.'
+                }
             })
-            .catch((err) => {
-                this.dispatchEvent(
-                    new CustomEvent('showtoast', {
-                        bubbles: true,
-                        composed: true,
-                        detail: {
-                            variant: 'error',
-                            message: `Your unsubscription failed. (${err.message})`
-                        }
-                    })
-                );
-            })
-            .finally(() => {
-                this.hasSubscription = isSubscribed();
-            });
+        );
     }
 
     handlePrevious() {

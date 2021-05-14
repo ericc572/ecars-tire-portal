@@ -8,14 +8,11 @@ const compression = require('compression');
 const logger = require('pino')({ prettyPrint: { colorize: true } });
 const pino = require('express-pino-logger');
 const {
-    getPublicKey,
-    createSubscription,
-    deleteSubscription,
-    push
+    createCase,
 } = require('./api');
 
 const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 4027;
+const PORT = process.env.PORT || 4200;
 const DIST_DIR = './dist';
 
 const app = express();
@@ -25,10 +22,7 @@ app.use(pino({ logger }));
 app.use(compression());
 app.use(bodyParser.json());
 app.use(express.static(DIST_DIR));
-app.get('/api/publickey', getPublicKey);
-app.post('/api/subscription', createSubscription);
-app.delete('/api/subscription', deleteSubscription);
-app.post('/api/push', push);
+app.post('/api/case', createCase);
 
 app.use('/', (_req, res) => {
     res.sendFile(path.resolve(DIST_DIR, 'index.html'));
