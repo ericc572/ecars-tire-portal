@@ -2,7 +2,6 @@ const logger = require('pino')({ prettyPrint: { colorize: true } });
 const { Pool } = require('pg');
 const jsforce = require('jsforce');
 
-
 const connectionString = process.env.HEROKU_POSTGRESQL_OLIVE_URL;
 
 const client = new Pool({
@@ -56,7 +55,7 @@ async function createCase(req, res, next) {
     console.log(req.body);
     try {
         const accountId = '0015e000004udQPAAY'
-        const testSubject = `${accountId} new case for: ${req.body.lead['range']}`
+        const testSubject = `${req.body.lead['range']}: ${req.body.lead['firstName']} ${req.body.lead['lastName']}`
         await client.query(
             'INSERT into salesforce.case(subject, accountid, priority, contactphone, status, contactemail, description) VALUES($1,$2,$3,$4,$5,$6,$7)',
             [
