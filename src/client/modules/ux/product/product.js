@@ -55,6 +55,7 @@ export default class Product extends LightningElement {
                             }
                         })
                     );
+                    this.subscribeToSalesforceMessages();
                 })
                 .catch((err) => {
                     this.dispatchEvent(
@@ -83,7 +84,7 @@ export default class Product extends LightningElement {
         }
     }
 
-    handleCaseCased(status) {
+    handleCaseUpdated(status) {
         this.dispatchEvent(
             new CustomEvent('showtoast', {
                 bubbles: true,
@@ -112,5 +113,31 @@ export default class Product extends LightningElement {
 
     handlePrevious() {
         this.dispatchEvent(new CustomEvent('previous'));
+    }
+
+    subscribeToSalesforceMessages() {
+        console.log("LISTENING TO STREAM!")
+        const connect = () => {
+          // Server-Sent Events (SSE) handler to receive messages
+          // https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events
+          const eventSource = new EventSource("http://eric-salesforce-stream.herokuapp.com/stream/messages");
+    
+          // event: salesforce
+          // id: ce4ccabd-6359-466d-886a-730689685b0b-27
+          // data: {"schema":"njzr4yOHFi71zZhlyqhWXA","payload":{"StatusChanged__c":"Escalated","CreatedById":"0055e0000019yDJAAY","CreatedDate":"2021-05-14T22:02:47.144Z"},"event":{"replayId":2259041},"context":{}}
+    
+          // Receive Salesforce change events as they occur.
+          eventSource.addEventListener("salesforce", event => {
+            const message = JSON.parse(event.data);
+            console.log("received message!", message)
+            this.handleCaseUpdated(message.payload.StatusChanged__c)
+          }, false);
+        }
+    
+        connect();
+      }
+    
+    unsubscribeFromSalesforceMessages = () => {
+        eventSource.close();
     }
 }
