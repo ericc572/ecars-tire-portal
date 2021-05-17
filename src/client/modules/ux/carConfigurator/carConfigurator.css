@@ -1,3 +1,11 @@
+h1 {
+    display: flex;
+    text-align: right;
+    font-weight: bold;
+    font-size: 36px;
+    margin-left: 70px;
+}
+
 .container {
     display: flex;
     flex-direction: row;
@@ -11,7 +19,7 @@
     flex: 3;
     width: 100%;
     padding-right: 50px;
-
+    padding-left: 30 px;
     max-height: 80%;
     overflow: hidden;
 }
@@ -29,6 +37,7 @@
 
 .container-options {
     width: 410px;
+    padding: 50px;
 }
 
 /* options */

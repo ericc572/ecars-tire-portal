@@ -33,13 +33,6 @@ export default class Configurator extends LightningElement {
         return `https://static.tirerack.com/content/dam/tires/michelin/mi_pilot_super_sport_full.jpg?imwidth=440&impolicy=tow-pdp-main`;
     }
 
-    get imgClass() {
-        if (this.currentSection === 2) {
-            return 'container-images';
-        }
-        return 'container-images padded';
-    }
-
     handleRangeChange(event) {
         const rangeLabel = event.currentTarget.dataset.range;
         console.log(rangeLabel);
