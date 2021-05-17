@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const logger = require('pino')({ prettyPrint: { colorize: true } });
 const pino = require('express-pino-logger');
-const { Server } = require('ws');
 
 const {
     createCase,
