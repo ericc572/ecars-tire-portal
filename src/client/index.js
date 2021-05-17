@@ -45,6 +45,8 @@ function detectFeatures() {
     };
 }
 
+
+
 function unsupportedErrorMessage() {
     const { outdated } = window;
     outdated.style.display = 'unset';

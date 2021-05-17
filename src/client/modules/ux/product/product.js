@@ -120,7 +120,7 @@ export default class Product extends LightningElement {
         const connect = () => {
           // Server-Sent Events (SSE) handler to receive messages
           // https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events
-          const eventSource = new EventSource(`${process.env.SALESFORCE_STREAM_URL}/stream/messages`);
+          const eventSource = new EventSource(`https://eric-salesforce-stream.herokuapp.com/stream/messages`);
     
           // event: salesforce
           // id: ce4ccabd-6359-466d-886a-730689685b0b-27
