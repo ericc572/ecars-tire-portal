@@ -92,7 +92,8 @@ export default class Product extends LightningElement {
                 detail: {
                     variant: 'success',
                     message:
-                        `Your case status has been changed to: ${status}`
+                        `Your case status has been changed to: ${status}`,
+                    mode: 'sticky'
                 }
             })
         );

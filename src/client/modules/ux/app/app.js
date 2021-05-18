@@ -4,7 +4,8 @@ export default class App extends LightningElement {
     showToast = false;
     toastVariant = 'success';
     toastMessage = 'default message';
-
+    toastMode = 'sticky';
+    
     connectedCallback() {
         this.addEventListener('showtoast', this.handleShowToast.bind(this));
     }
@@ -12,6 +13,8 @@ export default class App extends LightningElement {
     handleShowToast(event) {
         this.toastVariant = event.detail.variant;
         this.toastMessage = event.detail.message;
+        this.toastMode = event.detail.mode;
+
         let el = this.template.querySelector('.toast.hide');
         if (!el) {
             el = this.template.querySelector('.toast');
